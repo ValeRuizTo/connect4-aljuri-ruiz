@@ -3,16 +3,15 @@ from connect4.policy import Policy
 
 # MCTS CONNECT-4 POLICY – ALJURI-RUIZ
 
-class AljuriRuiz(Policy):
+class ALjuriRuiz(Policy):
 
-    def mount(self)-> None:
+    def mount(self, time_out: int)-> None:
         pass
 
     def act(self, board: np.ndarray) -> int:
 
         #   CONFIGURACIÓN MCTS
-
-        ITER = 50
+        ITER = 10
         C = 1.41
 
         #   FUNCIONES INTERNAS
@@ -68,6 +67,26 @@ class AljuriRuiz(Policy):
                 return 2
 
             return 0
+
+
+        #  CHECKS TÁCTICOS: WIN / BLOCK
+
+        def immediate_tactics(b, player, legal):
+            # 1. WIN if possible
+            for m in legal:
+                nb = apply_move(b, m, player)
+                if winner(nb) == player:
+                    return m
+
+            # 2. BLOCK if opponent can win
+            opp = -player
+            for m in legal:
+                nb = apply_move(b, m, opp)
+                if winner(nb) == opp:
+                    return m
+
+            return None
+
 
         def rollout(b, player):
             current = player
@@ -126,7 +145,14 @@ class AljuriRuiz(Policy):
         player = infer_player(board)
         legal = get_legal(board)
 
+        # If only one legal move → play it
         if len(legal) == 1:
             return legal[0]
 
+        #FIRST: WIN OR BLOCK
+        tact = immediate_tactics(board, player, legal)
+        if tact is not None:
+            return tact
+
+        # Otherwise MCTS
         return mcts(board, player, legal)
