@@ -11,7 +11,7 @@ class ALjuriRuiz(Policy):
     def act(self, board: np.ndarray) -> int:
 
         #   CONFIGURACIÓN MCTS
-        ITER = 10
+        ITER = 50
         C = 1.41
 
         #   FUNCIONES INTERNAS
