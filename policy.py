@@ -6,7 +6,7 @@ from connect4.policy import Policy
 
 class ALjuriRuiz(Policy):
 
-    def __init__(self, gamma=0.99, q_filename="Q_table_cleaned.json"):
+    def __init__(self, gamma=0.99, q_filename="Q_table_NuevoCleaned1.json"):
         # Memoria entre partidas (ya entrenada)
         self.Q = {}
         self.N = {}
