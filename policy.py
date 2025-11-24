@@ -120,7 +120,7 @@ class ALjuriRuiz(Policy):
     # MCTS FUERTE (ORIGINAL)
 
     def mcts(self, board, player, legal):
-        ITER = 10
+        ITER = 50
         C = 1.41
 
         def apply_move(b, col, p):
