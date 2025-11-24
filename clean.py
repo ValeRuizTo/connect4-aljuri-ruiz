@@ -4,7 +4,7 @@ INPUT = r"C:\Users\rogst\Downloads\fundamentosIA\Q_table_Nuevo.json"
 OUTPUT = r"C:\Users\rogst\Downloads\fundamentosIA\Q_table_NuevoCleaned.json"
 
 # Umbral mínimo para conservar una entrada
-MIN_N = 2   # puedes poner 2, 3, 4 según quieras limpiar más o menos
+MIN_N = 2   # Numero que dicta lo que quiero limpiar, eliminas las entradas un numero igual o menor al definido, para quitar entradas basuras
 
 with open(INPUT, "r") as f:
     data = json.load(f)
@@ -28,3 +28,4 @@ with open(OUTPUT, "w") as f:
     json.dump({"Q": Q_new, "N": N_new}, f)
 
 print(f"Archivo limpio guardado en:\n{OUTPUT}")
+
