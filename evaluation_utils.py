@@ -6,8 +6,8 @@ from policyHello import HelloPolicy
 # Crear 8 agentes inteligentes
 agents_good = [ALjuriRuiz() for _ in range(8)]
 
-# Crear 8 agentes aleapltorios
-agents_random = [HelloPolicy() for _ in range(8)]
+# Crear 1 agentes aleatorios
+agents_random = [HelloPolicy() for _ in range(1)]
 
 agents = agents_good + agents_random
 
@@ -21,9 +21,9 @@ for a in agents:
 
 if __name__ == "__main__":
     import multiprocessing as mp
-    mp.freeze_support()   # importante para Windows
-    train_agents(agents, episodes_per_pair=300)
+    mp.freeze_support()   
+    train_agents(agents, episodes_per_pair=100)
 
 
 # Guardar modelo final
-agents[0].save("Q_table.json")
+agents[0].save("Q_table_Nuevo.json")
